@@ -42,6 +42,7 @@ static void ListaMonstros()
 
         if (response.StatusCode == System.Net.HttpStatusCode.OK && response.Content != null)
         {
+            // Adiciona a resposta da API de forma Deserializada na lista de monstros
             monstros.Add(JsonSerializer.Deserialize<Monstro>(response.Content)!); // ! operador indicando que não pode ser nullo   
         }
         else
