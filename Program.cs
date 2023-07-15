@@ -1,19 +1,30 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using PokéGotchi;
 using PokéGotchi.Models;
 using RestSharp;
 using System.Text.Json;
 
-Console.WriteLine("Start Here!");
 Main();
 
 static void Main()
 {
-    ListaMonstros();
+    List<Mascote>? mascotes = new();
+    Menu menu = new();
+
+    mascotes = CarregarMascotes();
+
+    if (mascotes is null)
+    {
+        Console.WriteLine("Erro no programa!");
+        return;
+    }
+
+    Menu.ExibeMenu(mascotes);
 }
 
-static void ListaMonstros()
+static List<Mascote>? CarregarMascotes()
 {
-    List<string> names = new List<string>
+    List<string> names = new()
     {
         "eevee",
         "togepi",
@@ -27,12 +38,14 @@ static void ListaMonstros()
         "zorua"
     };
 
-    List<Monstro> monstros = new List<Monstro>();
+    List<Mascote> mascotes = new List<Mascote>();
 
     /*
      * RestClient  -> Define o cliente    -> URL
      * RestRequest -> Define a requisição -> GET
      */
+
+    int idCount = 0;
 
     foreach (string name in names)
     {
@@ -42,8 +55,10 @@ static void ListaMonstros()
 
         if (response.StatusCode == System.Net.HttpStatusCode.OK && response.Content != null)
         {
-            // Adiciona a resposta da API de forma Deserializada na lista de monstros
-            monstros.Add(JsonSerializer.Deserialize<Monstro>(response.Content)!); // ! operador indicando que não pode ser nullo   
+            // Adiciona a resposta da API de forma Deserializada na lista de mascotes
+            mascotes.Add(JsonSerializer.Deserialize<Mascote>(response.Content)!); // ! operador indicando que não pode ser nullo   
+            mascotes[idCount].id = idCount;
+            idCount++;
         }
         else
         {
@@ -52,13 +67,14 @@ static void ListaMonstros()
         }
     }
 
-    int cont = 1;
-    foreach (Monstro monstro in monstros)
+    if (mascotes.Count > 0)
     {
-        Console.WriteLine("---------------------------------------");
-        Console.WriteLine($"Criatura nº{cont}");
-        monstro.ExibirMonstro();
-        cont++;
+        return mascotes;
+    }
+    else
+    {
+        Console.WriteLine("Nada foi consumido da API!");
+        return null;
     }
 
 }

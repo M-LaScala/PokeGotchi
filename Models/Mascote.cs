@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Globalization;
+using System.Text.Json.Serialization;
 
 namespace PokéGotchi.Models;
 
@@ -26,10 +27,18 @@ public class Tipo
     public string NomeTipo { get; set; }
 }
 
-internal class Monstro
+internal class Mascote
 {
+    private string nome;
+
+    public int id { get; set; }
+
     [JsonPropertyName("name")]
-    public string Nome { get; set; }
+    public string Nome 
+    { 
+        get { return nome; } 
+        set { nome = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value); }
+    }
 
     [JsonPropertyName("height")]
     public int Altura { get; set; }
@@ -43,12 +52,17 @@ internal class Monstro
     [JsonPropertyName("types")]
     public List<Tipos> Tipos { get; set; }
 
-    public void ExibirMonstro()
+    public void ExibirMascote()
+    {
+        Console.WriteLine($"nº{id} - {Nome}");
+    }
+
+    public void ExibirDetalhesMascote()
     {
         Console.WriteLine($"Nome: {Nome}");
         Console.WriteLine($"Altura: {Altura}");
         Console.WriteLine($"Peso: {Peso}");
-        Console.WriteLine($"Habilidades: ");
+        Console.WriteLine($"Habilidade(s): ");
         foreach (var hNome in Habilidades)
         {
             Console.WriteLine(hNome.habilidade.NomeHabilidade);
