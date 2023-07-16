@@ -27,7 +27,7 @@ public class Tipo
     public string NomeTipo { get; set; }
 }
 
-internal class Mascote
+internal class MascoteModel
 {
     private string nome;
 
@@ -59,6 +59,7 @@ internal class Mascote
 
     public void ExibirDetalhesMascote()
     {
+        Console.WriteLine("----------------------------- DETALHES -------------------------------");
         Console.WriteLine($"Nome: {Nome}");
         Console.WriteLine($"Altura: {Altura}");
         Console.WriteLine($"Peso: {Peso}");

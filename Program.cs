@@ -1,15 +1,14 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using PokéGotchi;
 using PokéGotchi.Models;
 using RestSharp;
 using System.Text.Json;
+using static PokéGotchi.Controller.MascoteController;
 
 Main();
 
 static void Main()
 {
-    List<Mascote>? mascotes = new();
-    Menu menu = new();
+    List<MascoteModel>? mascotes = new();
 
     mascotes = CarregarMascotes();
 
@@ -19,10 +18,10 @@ static void Main()
         return;
     }
 
-    Menu.ExibeMenu(mascotes);
+    MenuPrincipal(mascotes);
 }
 
-static List<Mascote>? CarregarMascotes()
+static List<MascoteModel>? CarregarMascotes()
 {
     List<string> names = new()
     {
@@ -38,7 +37,7 @@ static List<Mascote>? CarregarMascotes()
         "zorua"
     };
 
-    List<Mascote> mascotes = new List<Mascote>();
+    List<MascoteModel> mascotes = new List<MascoteModel>();
 
     /*
      * RestClient  -> Define o cliente    -> URL
@@ -56,7 +55,7 @@ static List<Mascote>? CarregarMascotes()
         if (response.StatusCode == System.Net.HttpStatusCode.OK && response.Content != null)
         {
             // Adiciona a resposta da API de forma Deserializada na lista de mascotes
-            mascotes.Add(JsonSerializer.Deserialize<Mascote>(response.Content)!); // ! operador indicando que não pode ser nullo   
+            mascotes.Add(JsonSerializer.Deserialize<MascoteModel>(response.Content)!); // ! operador indicando que não pode ser nullo   
             mascotes[idCount].id = idCount;
             idCount++;
         }
