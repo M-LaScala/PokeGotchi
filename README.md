@@ -23,3 +23,7 @@ Model: Modelo e acesso a dados. São essas classes que definirão os padrões do
 View: A view corresponde ao Front-end e é onde você coloca as suas telas, como, por exemplo, o HTML em casos de aplicações web, 
 janelas em casos de aplicações desktop e, no seu caso, a sua classe de comunicação com o usuário.
 Controller: Essa é a parte lógica da aplicação. Essa camada é onde se aplicam as regras da aplicação e onde se relacionam os modelos e as views.
+
+LINQ (Language Integrated Query) é uma extensão da linguagem C# que permite realizar consultas e
+operações em coleções de dados de forma integrada e fluente. Ele fornece uma maneira poderosa de 
+consultar e manipular dados em diversas fontes, como listas, arrays, bancos de dados, serviços web e muito mais.
