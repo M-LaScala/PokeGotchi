@@ -10,38 +10,41 @@ namespace PokéGotchi.Controller
         {
 
             int oP;
-            MascoteModel? MascoteEscolhido = new();
+            MascoteModel? MascoteAdotado = new();
+
+            Console.Clear(); ExibeLogo(); ExibeMenuInicial();
 
             do
             {
-                Console.Clear();
-                ExibeLogo();
-                ExibeMenuInicial();
 
-                oP = int.Parse(Console.ReadLine() ?? "0");
+                try { oP = int.Parse(Console.ReadLine() ?? "0"); } catch { oP = -1; };
 
                 switch (oP)
                 {
                     case (int)MenuOpc.ADOTAR_MASCOTE:
-                        MascoteEscolhido = AdotarMascote(mascotes);
+                        MascoteAdotado = AdotarMascote(mascotes);
+                        Console.Clear(); ExibeLogo(); ExibeMenuInicial();
                         break;
 
                     case (int)MenuOpc.VER_MASCOTE_ADOTADO:
                         
-                        if (MascoteEscolhido.Nome != null)
+                        if (MascoteAdotado.Nome != null)
                         {
-                            VerMascote(MascoteEscolhido);
-                            Console.ReadLine();
+                            VerMascote(MascoteAdotado);
+                            Console.Clear(); ExibeLogo(); ExibeMenuInicial();
                         }
                         else
                         {
                             SemMascote();
-                            Console.ReadLine();
                         }
                        
                         break;
 
+                    case (int)MenuOpc.SAIR:
+                        break;
+
                     default:
+                        ErroEncontrarOpcao();
                         break;
                 }
 
@@ -53,8 +56,9 @@ namespace PokéGotchi.Controller
         {
 
             int escolhaMascote, oP;
-            MascoteModel MascoteEscolhido = new();
-
+            MascoteModel MascoteEscolhido, MascoteAdotado = new();
+            
+            Console.Clear();
             ExibeMenuAdocao();
 
             foreach (MascoteModel mascote in mascotes)
@@ -64,7 +68,7 @@ namespace PokéGotchi.Controller
 
             do
             {
-                escolhaMascote = int.Parse(Console.ReadLine() ?? "0");
+                try { escolhaMascote = int.Parse(Console.ReadLine() ?? "0"); } catch { escolhaMascote = -1; }
                 MascoteEscolhido = ListarMascotePorId(mascotes, escolhaMascote);
 
                 if (MascoteEscolhido == null)
@@ -73,23 +77,28 @@ namespace PokéGotchi.Controller
                 }
 
             } while (MascoteEscolhido == null);
-            
+
+            ExibeManuAdocaoOPC(MascoteEscolhido);
 
             do
             {
-                ExibeManuAdocaoOPC(MascoteEscolhido);
 
-                oP = int.Parse(Console.ReadLine() ?? "0");
+                try { oP = int.Parse(Console.ReadLine() ?? "0"); } catch { oP = -1; };
 
                 switch (oP)
                 {
                     case (int)MenuAdocao.SABER_MAIS:
                         MascoteEscolhido.ExibirDetalhesMascote();
+                        ExibeManuAdocaoOPC(MascoteEscolhido);
                         break;
 
                     case (int)MenuAdocao.ADOTAR:
+                        MascoteAdotado = MascoteEscolhido;
                         ExibeAdocao(MascoteEscolhido);
                         Console.ReadLine();
+                        break;
+
+                    case (int)MenuAdocao.VOLTAR:
                         break;
 
                     default:
@@ -99,20 +108,46 @@ namespace PokéGotchi.Controller
 
             } while (oP != (int)MenuAdocao.VOLTAR && oP != (int)MenuAdocao.ADOTAR);
 
-            return MascoteEscolhido;
+            return MascoteAdotado;
         }
 
-        public static void VerMascote(MascoteModel mascotes)
+        public static void VerMascote(MascoteModel mascote)
         {
-            ExibeSeusMascotes(mascotes);
-        }
+            int oP;
 
+            ExibeSeusMascotesOPC(mascote);
+
+            do
+            {
+
+                try { oP = int.Parse(Console.ReadLine() ?? "0"); } catch { oP = -1; };
+
+                switch (oP)
+                {
+                    case (int)MenuMascote.VER_STATUS:
+                        break;
+
+                    case (int)MenuMascote.BRINCAR:
+                        break;
+
+                    case (int)MenuMascote.ALIMENTAR:
+                        break;
+
+                    case (int)MenuMascote.VOLTAR:
+                        break;
+
+                    default:
+                        ErroEncontrarOpcao();
+                        break;
+                }
+
+            } while (oP != (int)MenuMascote.VOLTAR);
+
+        }
         public static MascoteModel ListarMascotePorId(List<MascoteModel> mascotes, int id)
         {
             MascoteModel mascote = mascotes.Find(p => p.id == id)!;
             return mascote;
         }
-
-
     }
 }

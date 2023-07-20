@@ -55,10 +55,10 @@ namespace PokéGotchi.View
         {
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine($"Mascote {MascoteEscolhido.Nome} adotado com sucesso!\n\n\n\n");
-            Console.WriteLine("Pressione qualquer tecla para continuar.");
+            Console.WriteLine("Pressione enter para continuar.");
         }
 
-        public static void ExibeSeusMascotes(MascoteModel MascoteEscolhido)
+        public static void ExibeSeusMascotesOPC(MascoteModel MascoteEscolhido)
         {
             Console.WriteLine("---------------------------- VER MASCOTE -----------------------------");
             Console.WriteLine($"Agora você vai poder brincar com seu novo amigo! {MascoteEscolhido.Nome}");
@@ -71,8 +71,8 @@ namespace PokéGotchi.View
         public static void SemMascote()
         {
             Console.WriteLine("---------------------------- VER MASCOTE -----------------------------");
-            Console.WriteLine("Você ainda não adotou um mascote!\n\n\n\n");
-            Console.WriteLine("Pressione qualquer tecla para continuar.");
+            Console.WriteLine("Você ainda não adotou um mascote!");
+            Console.WriteLine("Por favor, gentileza entrar com uma nova opcao.");
         }
 
         public static void ErroEncontrarOpcao()
@@ -80,5 +80,10 @@ namespace PokéGotchi.View
             Console.WriteLine("Opcao não encontrado. Por favor, digite novamente!");
         }
 
+        public static void ExibirNovaOpc()
+        {
+            Console.WriteLine("----------------------------------------------------------------------");
+            Console.WriteLine("Por favor, gentileza entrar com uma nova opcao.");
+        }
     }
 }
