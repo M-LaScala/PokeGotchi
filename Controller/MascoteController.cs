@@ -1,5 +1,7 @@
 ﻿using PokéGotchi.Models;
 using static PokéGotchi.View.MascoteView;
+using AutoMapper;
+using PokéGotchi.Model;
 
 namespace PokéGotchi.Controller
 {
@@ -10,9 +12,19 @@ namespace PokéGotchi.Controller
         {
 
             int oP;
-            MascoteModel? MascoteAdotado = new();
+            MascoteModel? MascoteRecebido = new();
+            MascoteAdotadoModel MascoteAdotado = new();
 
             Console.Clear(); ExibeLogo(); ExibeMenuInicial();
+
+            // Configurando o AutoMapper os objetos a serem mapeados ( Origem -> Destino )
+            var Config = new MapperConfiguration(cfg => 
+            {
+                cfg.CreateMap<MascoteModel, MascoteAdotadoModel>(); 
+            });
+
+            // Definindo o mapper
+            var mapper = Config.CreateMapper();
 
             do
             {
@@ -22,7 +34,9 @@ namespace PokéGotchi.Controller
                 switch (oP)
                 {
                     case (int)MenuOpc.ADOTAR_MASCOTE:
-                        MascoteAdotado = AdotarMascote(mascotes);
+                        MascoteRecebido = AdotarMascote(mascotes);
+                        //Mapeando o objeto
+                        MascoteAdotado = mapper.Map<MascoteAdotadoModel>(MascoteRecebido);
                         Console.Clear(); ExibeLogo(); ExibeMenuInicial();
                         break;
 
@@ -111,7 +125,7 @@ namespace PokéGotchi.Controller
             return MascoteAdotado;
         }
 
-        public static void VerMascote(MascoteModel mascote)
+        public static void VerMascote(MascoteAdotadoModel mascote)
         {
             int oP;
 
@@ -125,6 +139,7 @@ namespace PokéGotchi.Controller
                 switch (oP)
                 {
                     case (int)MenuMascote.VER_STATUS:
+                        mascote.ExibirDetalhesMascote();
                         break;
 
                     case (int)MenuMascote.BRINCAR:

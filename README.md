@@ -27,3 +27,11 @@ Controller: Essa é a parte lógica da aplicação. Essa camada é onde se aplic
 LINQ (Language Integrated Query) é uma extensão da linguagem C# que permite realizar consultas e
 operações em coleções de dados de forma integrada e fluente. Ele fornece uma maneira poderosa de 
 consultar e manipular dados em diversas fontes, como listas, arrays, bancos de dados, serviços web e muito mais.
+
+AutoMapper
+A convention-based object-object mapper.
+
+A ideia principal por trás do AutoMapper é permitir que você defina uma configuração que indique como as 
+propriedades de um objeto devem ser mapeadas para outro objeto. Uma vez que a configuração foi definida, 
+o AutoMapper realiza o mapeamento automaticamente, 
+copiando os valores das propriedades correspondentes do objeto de origem para o objeto de destino.

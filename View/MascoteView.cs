@@ -1,4 +1,5 @@
-﻿using PokéGotchi.Models;
+﻿using PokéGotchi.Model;
+using PokéGotchi.Models;
 
 namespace PokéGotchi.View
 {
@@ -58,7 +59,7 @@ namespace PokéGotchi.View
             Console.WriteLine("Pressione enter para continuar.");
         }
 
-        public static void ExibeSeusMascotesOPC(MascoteModel MascoteEscolhido)
+        public static void ExibeSeusMascotesOPC(MascoteAdotadoModel MascoteEscolhido)
         {
             Console.WriteLine("---------------------------- VER MASCOTE -----------------------------");
             Console.WriteLine($"Agora você vai poder brincar com seu novo amigo! {MascoteEscolhido.Nome}");
