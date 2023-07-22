@@ -37,7 +37,7 @@ namespace PokéGotchi.View
         {
             Console.WriteLine("-------------------------------- MENU --------------------------------");
             Console.WriteLine($"{(int)MenuOpc.ADOTAR_MASCOTE} - Adotar um mascote virtual");
-            Console.WriteLine($"{(int)MenuOpc.VER_MASCOTE_ADOTADO} - Ve seu mascote");
+            Console.WriteLine($"{(int)MenuOpc.VER_MASCOTE_ADOTADO} - Ver seu mascote");
             Console.WriteLine($"{(int)MenuOpc.SAIR} - Sair");
         }
         public static void ExibeMenuAdocao()
