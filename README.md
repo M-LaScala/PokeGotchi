@@ -71,6 +71,7 @@ Ao executar a aplicação, se nenhum erro ocorrer na comunicação com a  API, v
 ## Conclusão
 
 Este projeto teve início no ano de 2023, com o propósito de ser um estudo prático para o consumo de APIs com .NET. O objetivo principal é explorar e compreender os conceitos e práticas relacionadas ao consumo de APIs, obtendo respostas e manipulando os dados JSON através da deserialização das informações e atribuindo-lhes utilidade dentro da aplicação. 
+
 O resultado final é uma aplicação simplificada seguindo as normas da arquitetura MVC, que pode ser facilmente incrementada no futuro.
 
 ## Observações 
