@@ -35,3 +35,6 @@ A ideia principal por trás do AutoMapper é permitir que você defina uma confi
 propriedades de um objeto devem ser mapeadas para outro objeto. Uma vez que a configuração foi definida, 
 o AutoMapper realiza o mapeamento automaticamente, 
 copiando os valores das propriedades correspondentes do objeto de origem para o objeto de destino.
+
+realizar o publish da aplicação 
+

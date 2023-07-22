@@ -1,6 +1,8 @@
-﻿namespace PokéGotchi.Model
+﻿using PokéGotchi.Models;
+
+namespace PokéGotchi.Model
 {
-    internal class MascoteAdotadoModel
+    internal class MascoteAdotado
     {
         public int id { get; set; }
 
@@ -9,16 +11,16 @@
         public int Altura { get; set; }
 
         public int Peso { get; set; }
-        public List<String> Habilidades { get; set; }
+        public List<Habilidades> Habilidades { get; set; }
 
-        public List<String> Tipos { get; set; }
+        public List<Tipos> Tipos { get; set; }
 
         public int Alegria { get; set; }
 
         public int Fome { get; private set; }
 
         // Metodo Construtor
-        public MascoteAdotadoModel() 
+        public MascoteAdotado() 
         {
             Alegria = 5;
             Fome = 5;
@@ -40,12 +42,12 @@
             Console.WriteLine($"Habilidade(s): ");
             foreach (var hNome in Habilidades)
             {
-                Console.WriteLine(hNome);
+                Console.WriteLine(hNome.habilidade.NomeHabilidade);
             }
             Console.WriteLine($"Tipo(s): ");
             foreach (var tNome in Tipos)
             {
-                Console.WriteLine(tNome);
+                Console.WriteLine(tNome.tipo.NomeTipo);
             }
         }
 

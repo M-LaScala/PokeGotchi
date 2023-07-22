@@ -8,19 +8,20 @@ namespace PokéGotchi.Controller
     internal class MascoteController
     {
 
-        public static void MenuPrincipal(List<MascoteModel> mascotes)
+        public static void MenuPrincipal(List<MascoteDTO> mascotes)
         {
 
             int oP;
-            MascoteModel? MascoteRecebido = new();
-            MascoteAdotadoModel MascoteAdotado = new();
+            MascoteDTO? MascoteRecebido = new();
+            MascoteAdotado MascoteAdotado = new();
 
             Console.Clear(); ExibeLogo(); ExibeMenuInicial();
 
             // Configurando o AutoMapper os objetos a serem mapeados ( Origem -> Destino )
             var Config = new MapperConfiguration(cfg => 
             {
-                cfg.CreateMap<MascoteModel, MascoteAdotadoModel>(); 
+                cfg.CreateMap<MascoteDTO, MascoteAdotado>()
+                .ForMember(dest => dest.Habilidades, opt => opt.MapFrom(src => src.Habilidades)); 
             });
 
             // Definindo o mapper
@@ -36,7 +37,7 @@ namespace PokéGotchi.Controller
                     case (int)MenuOpc.ADOTAR_MASCOTE:
                         MascoteRecebido = AdotarMascote(mascotes);
                         //Mapeando o objeto
-                        MascoteAdotado = mapper.Map<MascoteAdotadoModel>(MascoteRecebido);
+                        MascoteAdotado = mapper.Map<MascoteAdotado>(MascoteRecebido);
                         Console.Clear(); ExibeLogo(); ExibeMenuInicial();
                         break;
 
@@ -66,16 +67,16 @@ namespace PokéGotchi.Controller
 
         }
 
-        public static MascoteModel? AdotarMascote(List<MascoteModel> mascotes)
+        public static MascoteDTO? AdotarMascote(List<MascoteDTO> mascotes)
         {
 
             int escolhaMascote, oP;
-            MascoteModel MascoteEscolhido, MascoteAdotado = new();
+            MascoteDTO MascoteEscolhido, MascoteAdotado = new();
             
             Console.Clear();
             ExibeMenuAdocao();
 
-            foreach (MascoteModel mascote in mascotes)
+            foreach (MascoteDTO mascote in mascotes)
             {
                 mascote.ExibirMascote();
             }
@@ -125,15 +126,20 @@ namespace PokéGotchi.Controller
             return MascoteAdotado;
         }
 
-        public static void VerMascote(MascoteAdotadoModel mascote)
+        public static void VerMascote(MascoteAdotado mascote)
         {
-            int oP;
+            int oP = -1;
 
-            ExibeSeusMascotesOPC(mascote);
+            Console.Clear();
+            
 
             do
             {
-
+                if(oP != (int)MenuMascote.VOLTAR)
+                {
+                    ExibeSeusMascotesOPC(mascote);
+                }
+                
                 try { oP = int.Parse(Console.ReadLine() ?? "0"); } catch { oP = -1; };
 
                 switch (oP)
@@ -143,9 +149,11 @@ namespace PokéGotchi.Controller
                         break;
 
                     case (int)MenuMascote.BRINCAR:
+                        mascote.Brincar();
                         break;
 
                     case (int)MenuMascote.ALIMENTAR:
+                        mascote.Alimentar();
                         break;
 
                     case (int)MenuMascote.VOLTAR:
@@ -159,9 +167,9 @@ namespace PokéGotchi.Controller
             } while (oP != (int)MenuMascote.VOLTAR);
 
         }
-        public static MascoteModel ListarMascotePorId(List<MascoteModel> mascotes, int id)
+        public static MascoteDTO ListarMascotePorId(List<MascoteDTO> mascotes, int id)
         {
-            MascoteModel mascote = mascotes.Find(p => p.id == id)!;
+            MascoteDTO mascote = mascotes.Find(p => p.id == id)!;
             return mascote;
         }
     }

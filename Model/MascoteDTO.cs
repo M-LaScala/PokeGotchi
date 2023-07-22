@@ -27,7 +27,7 @@ public class Tipo
     public string NomeTipo { get; set; }
 }
 
-internal class MascoteModel
+internal class MascoteDTO
 {
     private string nome;
 

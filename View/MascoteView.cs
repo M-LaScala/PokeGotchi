@@ -45,21 +45,21 @@ namespace PokéGotchi.View
             Console.WriteLine("------------------------- ADOTAR UM MASCOTE --------------------------");
             Console.WriteLine("Escolha uma especie: ");
         }
-        public static void ExibeManuAdocaoOPC(MascoteModel MascoteEscolhido)
+        public static void ExibeManuAdocaoOPC(MascoteDTO MascoteEscolhido)
         {
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine($"{(int)MenuAdocao.SABER_MAIS} - Saber mais sobre o(a) {MascoteEscolhido.Nome}");
             Console.WriteLine($"{(int)MenuAdocao.ADOTAR} - Adotar {MascoteEscolhido.Nome}");
             Console.WriteLine($"{(int)MenuAdocao.VOLTAR} - Voltar");
         }
-        public static void ExibeAdocao(MascoteModel MascoteEscolhido)
+        public static void ExibeAdocao(MascoteDTO MascoteEscolhido)
         {
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine($"Mascote {MascoteEscolhido.Nome} adotado com sucesso!\n\n\n\n");
             Console.WriteLine("Pressione enter para continuar.");
         }
 
-        public static void ExibeSeusMascotesOPC(MascoteAdotadoModel MascoteEscolhido)
+        public static void ExibeSeusMascotesOPC(MascoteAdotado MascoteEscolhido)
         {
             Console.WriteLine("---------------------------- VER MASCOTE -----------------------------");
             Console.WriteLine($"Agora você vai poder brincar com seu novo amigo! {MascoteEscolhido.Nome}");

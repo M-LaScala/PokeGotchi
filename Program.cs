@@ -8,7 +8,7 @@ Main();
 
 static void Main()
 {
-    List<MascoteModel>? mascotes = new();
+    List<MascoteDTO>? mascotes = new();
 
     mascotes = CarregarMascotes();
 
@@ -21,7 +21,7 @@ static void Main()
     MenuPrincipal(mascotes);
 }
 
-static List<MascoteModel>? CarregarMascotes()
+static List<MascoteDTO>? CarregarMascotes()
 {
     List<string> names = new()
     {
@@ -37,7 +37,7 @@ static List<MascoteModel>? CarregarMascotes()
         "zorua"
     };
 
-    List<MascoteModel> mascotes = new List<MascoteModel>();
+    List<MascoteDTO> mascotes = new List<MascoteDTO>();
 
     /*
      * RestClient  -> Define o cliente    -> URL
@@ -55,7 +55,7 @@ static List<MascoteModel>? CarregarMascotes()
         if (response.StatusCode == System.Net.HttpStatusCode.OK && response.Content != null)
         {
             // Adiciona a resposta da API de forma Deserializada na lista de mascotes
-            mascotes.Add(JsonSerializer.Deserialize<MascoteModel>(response.Content)!); // ! operador indicando que não pode ser nullo   
+            mascotes.Add(JsonSerializer.Deserialize<MascoteDTO>(response.Content)!); // ! operador indicando que não pode ser nullo   
             mascotes[idCount].id = idCount;
             idCount++;
         }
