@@ -70,7 +70,8 @@ Ao executar a aplicação, se nenhum erro ocorrer na comunicação com a  API, v
 
 ## Conclusão
 
-Este projeto teve início no ano de 2023, com o propósito de ser um estudo prático para o consumo de APIs com .NET. O objetivo principal é explorar e compreender os conceitos e práticas relacionadas ao consumo de APIs, obtendo respostas e manipulando os dados JSON através da deserialização das informações e atribuindo-lhes utilidade dentro da aplicação. O resultado final é uma aplicação simplificada seguindo as normas da arquitetura MVC, que pode ser facilmente incrementada no futuro.
+Este projeto teve início no ano de 2023, com o propósito de ser um estudo prático para o consumo de APIs com .NET. O objetivo principal é explorar e compreender os conceitos e práticas relacionadas ao consumo de APIs, obtendo respostas e manipulando os dados JSON através da deserialização das informações e atribuindo-lhes utilidade dentro da aplicação. 
+O resultado final é uma aplicação simplificada seguindo as normas da arquitetura MVC, que pode ser facilmente incrementada no futuro.
 
 ## Observações 
 
@@ -79,6 +80,7 @@ Site usado para gerar a mensagem do menu em forma de desenho.
 http://patorjk.com/software/taag/#p=display&f=Big&t=Tamagotchi%0A
 
 O CultureInfo foi utilizado para deixar a primeira letra em maiúsculo de um nome, seguindo as convenções da língua portuguesa.
+
 CultureInfo.CurrentCulture.TextInfo.ToTitleCase(STRING);
 
 https://pt.stackoverflow.com/questions/247/como-capitalizar-nomes-em-c
