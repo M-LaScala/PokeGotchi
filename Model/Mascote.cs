@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Text.Json.Serialization;
 
-namespace PokéGotchi.Models;
+namespace PokéGotchi.Model;
 
 public class Habilidades
 {

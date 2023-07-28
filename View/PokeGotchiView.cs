@@ -1,30 +1,17 @@
 ﻿using PokéGotchi.Model;
-using PokéGotchi.Models;
 using PokéGotchi.Utilitarios;
 
 namespace PokéGotchi.View
 {
-    internal class MascoteView
+    internal class PokeGotchiView
     {
-        public enum MenuOpc
-        {
-            ADOTAR_MASCOTE,
-            VER_MASCOTE_ADOTADO,
-            SAIR
-        }
-        public enum MenuAdocao
-        {
-            SABER_MAIS,
-            ADOTAR,
-            VOLTAR
-        }
+       
         public enum MenuMascote 
         {
             VER_STATUS,
             BRINCAR,
             ALIMENTAR,
             VOLTAR
-
         }
 
         public static void ExibeLogo()
@@ -33,12 +20,13 @@ namespace PokéGotchi.View
             DigitarNoCMD.EscreverLetraPorLetra("\nCoded by Matheus La Scala",45);
         }
 
-        public static void ExibeMenuInicial()
+        public static void ExibirMenus(Dictionary<int,string> LinhasMenu, string NomeMenu)
         {
-            Console.WriteLine("-------------------------------- MENU --------------------------------");
-            Console.WriteLine($"{(int)MenuOpc.ADOTAR_MASCOTE} - Adotar um mascote virtual");
-            Console.WriteLine($"{(int)MenuOpc.VER_MASCOTE_ADOTADO} - Ver seu mascote");
-            Console.WriteLine($"{(int)MenuOpc.SAIR} - Sair");
+            DigitarNoCMD.EscreverLetraPorLetra($"-------------------------------- {NomeMenu} --------------------------------",45);
+            foreach(KeyValuePair<int, string> menu in LinhasMenu)
+            {
+                DigitarNoCMD.EscreverLetraPorLetra($"{menu.Key} - {menu.Value}",45);
+            }
         }
         public static void ExibeMenuAdocao()
         {
@@ -78,13 +66,18 @@ namespace PokéGotchi.View
 
         public static void ErroEncontrarOpcao()
         {
-            Console.WriteLine("Opcao não encontrado. Por favor, digite novamente!");
+            DigitarNoCMD.EscreverLetraPorLetra("Opcao não encontrado. Por favor, digite novamente!",45);
         }
 
         public static void ExibirNovaOpc()
         {
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine("Por favor, gentileza entrar com uma nova opcao.");
+        }
+
+        public static void ExibirBuscaMascote() 
+        {
+            DigitarNoCMD.EscreverLetraPorLetra("Por favor, digite o nome do mascote que deseja procurar:", 45);
         }
     }
 }

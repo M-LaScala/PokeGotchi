@@ -1,16 +1,32 @@
-﻿using PokéGotchi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using PokéGotchi.Model;
+using PokéGotchi.Utilitarios;
+using static PokéGotchi.View.PokeGotchiView;
 
 namespace PokéGotchi.Menu
 {
-    internal class MenuAdocao : IMenu
+    internal class MenuAdocao
     {
-        public void ExibirMenu(List<Mascote> mascotes)
+
+        private readonly Dictionary<int, string> MenuOpc = new()
         {
+                {0, "Saber Mais" },
+                {1, "Adotar esse mascote" },
+                {2, "Voltar" }
+        };
+
+        public static void ExibirMenu(List<Mascote> mascotes)
+        {
+            // Configurando o AutoMapper os objetos a serem mapeados ( Origem -> Destino )
+            var Config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Mascote, MascoteAdotado>()
+                .ForMember(dest => dest.Habilidades, opt => opt.MapFrom(src => src.Habilidades));
+            });
+
+            // Definindo o mapper
+            var mapper = Config.CreateMapper();
+
             int escolhaMascote, oP;
             Mascote MascoteEscolhido, MascoteAdotado = new();
 
@@ -25,7 +41,7 @@ namespace PokéGotchi.Menu
             do
             {
                 try { escolhaMascote = int.Parse(Console.ReadLine() ?? "0"); } catch { escolhaMascote = -1; }
-                MascoteEscolhido = ListarMascotePorId(mascotes, escolhaMascote);
+                MascoteEscolhido = Filtros.ListarMascotePorId(mascotes, escolhaMascote);
 
                 if (MascoteEscolhido == null)
                 {

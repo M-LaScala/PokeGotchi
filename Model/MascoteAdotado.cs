@@ -1,82 +1,79 @@
-﻿using PokéGotchi.Models;
+﻿namespace PokéGotchi.Model;
 
-namespace PokéGotchi.Model
+internal class MascoteAdotado
 {
-    internal class MascoteAdotado
+    public int id { get; set; }
+
+    public string Nome { get; set; }
+
+    public int Altura { get; set; }
+
+    public int Peso { get; set; }
+    public List<Habilidades> Habilidades { get; set; }
+
+    public List<Tipos> Tipos { get; set; }
+
+    public int Alegria { get; set; }
+
+    public int Fome { get; private set; }
+
+    // Metodo Construtor
+    public MascoteAdotado() 
     {
-        public int id { get; set; }
+        Alegria = 5;
+        Fome = 5;
+    }
 
-        public string Nome { get; set; }
+    public void ExibirMascote()
+    {
+        Console.WriteLine($"nº{id} - {Nome}");
+    }
 
-        public int Altura { get; set; }
-
-        public int Peso { get; set; }
-        public List<Habilidades> Habilidades { get; set; }
-
-        public List<Tipos> Tipos { get; set; }
-
-        public int Alegria { get; set; }
-
-        public int Fome { get; private set; }
-
-        // Metodo Construtor
-        public MascoteAdotado() 
+    public void ExibirDetalhesMascote()
+    {
+        Console.WriteLine("----------------------------- DETALHES -------------------------------");
+        Console.WriteLine($"Nome: {Nome}");
+        Console.WriteLine($"Altura: {Altura}");
+        Console.WriteLine($"Peso: {Peso}");
+        Console.WriteLine($"{Nome} esta {((Alegria > 5) ? "Feliz" : "Triste")}");
+        Console.WriteLine($"{Nome} esta {((Fome > 5) ? "Satisfeito" : "Faminto")}");
+        Console.WriteLine($"Habilidade(s): ");
+        foreach (var hNome in Habilidades)
         {
-            Alegria = 5;
-            Fome = 5;
+            Console.WriteLine(hNome.habilidade.NomeHabilidade);
         }
-
-        public void ExibirMascote()
+        Console.WriteLine($"Tipo(s): ");
+        foreach (var tNome in Tipos)
         {
-            Console.WriteLine($"nº{id} - {Nome}");
+            Console.WriteLine(tNome.tipo.NomeTipo);
         }
+    }
 
-        public void ExibirDetalhesMascote()
+    public void Alimentar() 
+    {
+        if (Fome < 10)
         {
-            Console.WriteLine("----------------------------- DETALHES -------------------------------");
-            Console.WriteLine($"Nome: {Nome}");
-            Console.WriteLine($"Altura: {Altura}");
-            Console.WriteLine($"Peso: {Peso}");
-            Console.WriteLine($"{Nome} esta {((Alegria > 5) ? "Feliz" : "Triste")}");
-            Console.WriteLine($"{Nome} esta {((Fome > 5) ? "Satisfeito" : "Faminto")}");
-            Console.WriteLine($"Habilidade(s): ");
-            foreach (var hNome in Habilidades)
-            {
-                Console.WriteLine(hNome.habilidade.NomeHabilidade);
-            }
-            Console.WriteLine($"Tipo(s): ");
-            foreach (var tNome in Tipos)
-            {
-                Console.WriteLine(tNome.tipo.NomeTipo);
-            }
+            Console.WriteLine($"Seu {Nome} esta comendo . . .");
+            Fome++;
+            Alegria--;
         }
-
-        public void Alimentar() 
+        else 
         {
-            if (Fome < 10)
-            {
-                Console.WriteLine($"Seu {Nome} esta comendo . . .");
-                Fome++;
-                Alegria--;
-            }
-            else 
-            {
-                Console.WriteLine($"Seu {Nome} esta satisfeito e triste");
-            }
+            Console.WriteLine($"Seu {Nome} esta satisfeito e triste");
         }
+    }
 
-        public void Brincar()
+    public void Brincar()
+    {
+        if (Alegria < 10)
         {
-            if (Alegria < 10)
-            {
-                Console.WriteLine($"Seu {Nome} esta Brincando . . .");
-                Alegria++;
-                Fome--;
-            }
-            else
-            {
-                Console.WriteLine($"Seu {Nome} esta cansado e com fome");
-            }
+            Console.WriteLine($"Seu {Nome} esta Brincando . . .");
+            Alegria++;
+            Fome--;
+        }
+        else
+        {
+            Console.WriteLine($"Seu {Nome} esta cansado e com fome");
         }
     }
 }

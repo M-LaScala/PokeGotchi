@@ -1,11 +1,13 @@
-﻿using PokéGotchi.Models;
-using static PokéGotchi.Controller.MascoteController;
+﻿using PokéGotchi.Menu;
+using PokéGotchi.Model;
 using PokéGotchi.Utilitarios;
 
-static void Main()
+internal class Program
 {
-    // Definindo as criaturas iniciais
-    List<string> names = new()
+    private static void Main()
+    {
+        // Definindo as criaturas iniciais
+        List<string> names = new()
             {
                 "eevee",
                 "togepi",
@@ -19,15 +21,15 @@ static void Main()
                 "zorua"
             };
 
-    List<Mascote> mascotes = ComunicacaoAPI.CarregarMascotes(names)!;
+        List<Mascote> mascotes = ComunicacaoAPI.CarregarMascotes(names)!;
 
-    if (mascotes is null) 
-    {
-        Console.WriteLine("Erro no programa!");
-        return;
+        if (mascotes is null)
+        {
+            Console.WriteLine("Erro no programa!");
+            return;
+        }
+
+        MenuPrincipal menuPrincipal = new();
+        menuPrincipal.ExibirMenu(mascotes);
     }
-
-    MenuPrincipal(mascotes);
 }
-
-Main();

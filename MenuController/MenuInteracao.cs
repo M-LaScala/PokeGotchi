@@ -1,21 +1,15 @@
-﻿using PokéGotchi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static PokéGotchi.View.MascoteView;
+﻿using PokéGotchi.Model;
+using static PokéGotchi.View.PokeGotchiView;
 
 namespace PokéGotchi.Menu
 {
-    internal class MenuInteracao : IMenu
+    internal class MenuInteracao
     {
-        public void ExibirMenu(List<Mascote> mascotes)
+        public static void ExibirMenu(MascoteAdotado mascote)
         {
             int oP = -1;
 
             Console.Clear();
-
 
             do
             {
