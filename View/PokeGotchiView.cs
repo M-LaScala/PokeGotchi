@@ -6,9 +6,9 @@ namespace PokéGotchi.View
     internal class PokeGotchiView
     {
 
-        private const int VELOCIDADE = 0;
+        private const int VELOCIDADE = 45;
 
-        public static void ExibeLogo()
+        public static void ExibirLogo()
         {
             Console.WriteLine("\r\n  _______                                _       _     _ \r\n |__   __|                              | |     | |   (_)\r\n    | | __ _ _ __ ___   __ _  __ _  ___ | |_ ___| |__  _ \r\n    | |/ _` | '_ ` _ \\ / _` |/ _` |/ _ \\| __/ __| '_ \\| |\r\n    | | (_| | | | | | | (_| | (_| | (_) | || (__| | | | |\r\n    |_|\\__,_|_| |_| |_|\\__,_|\\__, |\\___/ \\__\\___|_| |_|_|\r\n                              __/ |                      \r\n                             |___/                       \r\n");
             DigitarNoCMD.EscreverLetraPorLetra("\nCoded by Matheus La Scala", VELOCIDADE);
@@ -16,34 +16,34 @@ namespace PokéGotchi.View
 
         public static void ExibirMenus(Dictionary<int,string> LinhasMenu, string NomeMenu)
         {   
-            DigitarNoCMD.EscreverLetraPorLetra($"-------------------------------- {NomeMenu} --------------------------------",VELOCIDADE);
+            Console.WriteLine($"-------------------------------- {NomeMenu} --------------------------------");
             foreach(KeyValuePair<int, string> menu in LinhasMenu)
             {
                 DigitarNoCMD.EscreverLetraPorLetra($"{menu.Key} - {menu.Value}", VELOCIDADE);
             }
         }
-        public static void ExibeMenuAdocao()
+        public static void ExibirMenuAdocao()
         {
-            DigitarNoCMD.EscreverLetraPorLetra("------------------------- ADOTAR UM MASCOTE --------------------------", VELOCIDADE);
+            Console.WriteLine("------------------------- ADOTAR UM MASCOTE --------------------------");
             DigitarNoCMD.EscreverLetraPorLetra("Escolha uma especie: ", VELOCIDADE);
         }
-        public static void ExibeAdocao(Mascote MascoteEscolhido)
+        public static void ExibirAdocao(Mascote MascoteEscolhido)
         {
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine($"Mascote {MascoteEscolhido.Nome} adotado com sucesso!\n\n\n\n");
             Console.WriteLine("Pressione enter para continuar.");
         }
 
-        public static void SemMascote()
+        public static void ExibirSemMascote()
         {
             Console.WriteLine("---------------------------- VER MASCOTE -----------------------------");
             Console.WriteLine("Você ainda não adotou um mascote!");
             Console.WriteLine("Por favor, gentileza entrar com uma nova opcao.");
         }
 
-        public static void ErroEncontrarOpcao()
+        public static void ExibirErroEncontrarOpcao()
         {
-            DigitarNoCMD.EscreverLetraPorLetra("Opcao não encontrado. Por favor, digite novamente!",VELOCIDADE);
+            Console.WriteLine("Opcao não encontrado. Por favor, digite novamente!");
         }
 
         public static void ExibirNovaOpc()
@@ -54,16 +54,24 @@ namespace PokéGotchi.View
 
         public static void ExibirBuscaMascote() 
         {
-            DigitarNoCMD.EscreverLetraPorLetra("Por favor, digite o nome do mascote que deseja procurar:", VELOCIDADE);
+            Console.WriteLine("Por favor, digite o nome do mascote que deseja procurar:");
         }
 
         public static void ExibirMascoteEncontrado()
         {
-            DigitarNoCMD.EscreverLetraPorLetra("O mascote foi encontrado e adicionado a lista",VELOCIDADE);
-        }
+            Console.WriteLine("O mascote foi encontrado e adicionado a lista.");
+        }   
         public static void ExibirMascoteNaoEncontrado()
         {
-            DigitarNoCMD.EscreverLetraPorLetra("Nenhum mascote foi encontrado", VELOCIDADE);
+            Console.WriteLine("Nenhum mascote foi encontrado ou mascote já exite na lista!");
+        }
+        public static void ExibirAguarde()
+        {
+            Console.WriteLine("Aguarde para voltar ao menu!");
+        }
+        public static void ExibirContinuarAdicionarMascote()
+        {
+            Console.WriteLine("Buscar outro mascote sim (1) não (0)!");
         }
     }
 }

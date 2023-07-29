@@ -1,5 +1,6 @@
 ﻿using PokéGotchi.Model;
 using RestSharp;
+using System.Globalization;
 using System.Text.Json;
 using System.Xml.Linq;
 
@@ -63,10 +64,19 @@ internal static class ComunicacaoAPI
 
         if (response.StatusCode == System.Net.HttpStatusCode.OK && response.Content != null)
         {
-            // Adiciona a resposta da API de forma Deserializada na lista de mascotes
-            mascotes.Add(JsonSerializer.Deserialize<Mascote>(response.Content)!); // ! operador indicando que não pode ser nullo   
-            mascotes[idCount].id = idCount;
-            return true;
+            // Adiciona a resposta da API de forma Deserializada na lista de mascotes caso o mascote não exita na lista ainda
+            if (mascotes.FindAll(x => x.Nome == CultureInfo.CurrentCulture.TextInfo.ToTitleCase(nome)).Count() == 0)
+            {
+                mascotes.Add(JsonSerializer.Deserialize<Mascote>(response.Content)!); // ! operador indicando que não pode ser nullo   
+                mascotes[idCount].id = idCount;
+                return true;
+            }
+            else
+            {
+                // Mascote já exite na lista
+                return false;
+            }
+            
         }
         else
         {

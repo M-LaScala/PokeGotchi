@@ -11,4 +11,5 @@ internal class DigitarNoCMD
         }
         Console.WriteLine(); // Pular uma linha após escrever todo o texto
     }
+
 }

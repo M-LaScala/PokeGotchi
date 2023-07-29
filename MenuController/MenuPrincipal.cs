@@ -17,15 +17,20 @@ namespace PokéGotchi.Menu
         public void ExibirMenu(ref List<Mascote> mascotes)
         {
 
-            int opc;
+            int opc = -1;
             MascoteAdotado mascoteAdotado = new();
 
-            Console.Clear(); ExibeLogo(); ExibirMenus(MenuOpc, "Menu principal");
+            Console.Clear(); ExibirLogo(); ExibirMenus(MenuOpc, "Menu principal");
 
             do
             {
-                try { opc = int.Parse(Console.ReadLine() ?? "0"); } catch { opc = -1; };
+                if (opc != -1)
+                {
+                    Console.Clear(); ExibirLogo(); ExibirMenus(MenuOpc, "Menu principal");
+                }
 
+                try { opc = int.Parse(Console.ReadLine() ?? "0"); } catch { opc = -1; };
+                Console.Clear();
                 // Valida opção
                 if (MenuOpc.ContainsKey(opc)!)
                 {
@@ -35,7 +40,16 @@ namespace PokéGotchi.Menu
                             PesquisarMascote(ref mascotes);
                             break;
                         case 1:
-                            MenuAdocao.ExibirMenu(ref mascotes, ref mascoteAdotado);
+                            
+                            if (mascoteAdotado is not null)
+                            {
+                                MenuAdocao.ExibirMenu(ref mascotes, ref mascoteAdotado);
+                            }
+                            else
+                            {
+                                ExibirSemMascote();
+                            }
+
                             break;
                         case 2:
                             MenuInteracao.ExibirMenu(ref mascoteAdotado);
@@ -48,7 +62,7 @@ namespace PokéGotchi.Menu
                 }
                 else
                 {
-                    ErroEncontrarOpcao();
+                    ExibirErroEncontrarOpcao();
                 }
 
             } while (opc != 3);
@@ -56,17 +70,31 @@ namespace PokéGotchi.Menu
 
         public static void PesquisarMascote(ref List<Mascote> mascotes)
         {
-            ExibirBuscaMascote();
-            string nomeMascote = Console.ReadLine() ?? "null";
-            if (ComunicacaoAPI.BuscarMascote(mascotes, nomeMascote))
+            int opc;
+
+            do
             {
-                ExibirMascoteEncontrado();
-            }
-            else
-            {
-                ExibirMascoteNaoEncontrado();
-            }
-            Thread.Sleep(2000);
+                Console.Clear();
+                ExibirBuscaMascote();
+                string nomeMascote = Console.ReadLine() ?? "null";
+                if (ComunicacaoAPI.BuscarMascote(mascotes, nomeMascote))
+                {
+                    ExibirMascoteEncontrado();
+                }
+                else
+                {
+                    ExibirMascoteNaoEncontrado();
+                }
+
+                ExibirContinuarAdicionarMascote();
+
+                try { opc = int.Parse(Console.ReadLine() ?? "0"); } catch { opc = -1; };
+
+            } while (opc == 1);
+
+            ExibirAguarde();
+            Thread.Sleep(2000); // 3 segundos
+
         }
 
     }

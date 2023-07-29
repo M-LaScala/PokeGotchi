@@ -47,7 +47,7 @@ namespace PokéGotchi.Menu
                         break;
 
                     default:
-                        ErroEncontrarOpcao();
+                        ExibirErroEncontrarOpcao();
                         break;
                 }
 

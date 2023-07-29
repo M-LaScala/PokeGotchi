@@ -33,7 +33,7 @@ namespace PokéGotchi.Menu
             var mapper = Config.CreateMapper();
 
             Console.Clear();
-            ExibeMenuAdocao();
+            ExibirMenuAdocao();
 
             foreach (Mascote mascote in mascotes)
             {
@@ -47,7 +47,7 @@ namespace PokéGotchi.Menu
 
                 if (mascoteEscolhido == null)
                 {
-                    ErroEncontrarOpcao();
+                    ExibirErroEncontrarOpcao();
                 }
 
             } while (mascoteEscolhido == null);
@@ -67,7 +67,7 @@ namespace PokéGotchi.Menu
                             break;
 
                         case 1:
-                            ExibeAdocao(mascoteEscolhido);
+                            ExibirAdocao(mascoteEscolhido);
                             mascoteAdotado = mapper.Map<MascoteAdotado>(mascoteEscolhido);
                             Console.ReadLine();
                             break;
@@ -81,7 +81,7 @@ namespace PokéGotchi.Menu
                 }
                 else
                 {
-                    ErroEncontrarOpcao();
+                    ExibirErroEncontrarOpcao();
                 }
 
             } while (opc != 2 && opc != 1);
