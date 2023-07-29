@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using PokéGotchi.Utilitarios;
+using System.Globalization;
 using System.Text.Json.Serialization;
 
 namespace PokéGotchi.Model;

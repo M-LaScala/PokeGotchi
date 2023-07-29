@@ -6,7 +6,7 @@ namespace PokéGotchi.Menu
 {
     internal class MenuPrincipal
     {
-        private readonly Dictionary<int, string> MenuOpc = new()
+        private static readonly Dictionary<int, string> MenuOpc = new()
         {
                 {0, "Pesquisar Mascote" },
                 {1, "Adotar mascote" },
@@ -14,42 +14,59 @@ namespace PokéGotchi.Menu
                 {3, "Sair" }
         };
 
-        public void ExibirMenu(List<Mascote> mascotes)
+        public void ExibirMenu(ref List<Mascote> mascotes)
         {
 
             int opc;
+            MascoteAdotado mascoteAdotado = new();
 
-            Console.Clear(); ExibeLogo(); ExibirMenus(MenuOpc, "Menu");
+            Console.Clear(); ExibeLogo(); ExibirMenus(MenuOpc, "Menu principal");
 
-            try { opc = int.Parse(Console.ReadLine() ?? "0"); } catch { opc = -1; };
-
-            // Valida opção
-            if (MenuOpc.ContainsKey(opc)!)
+            do
             {
-                switch (opc)
+                try { opc = int.Parse(Console.ReadLine() ?? "0"); } catch { opc = -1; };
+
+                // Valida opção
+                if (MenuOpc.ContainsKey(opc)!)
                 {
-                    case 0:
-                        ExibirBuscaMascote();
-                        string nomeMascote = Console.ReadLine() ?? "null";
-                        ComunicacaoAPI.BuscarMascote(mascotes, nomeMascote);
-                        break;
-                    case 1:
-                        MenuAdocao.ExibirMenu(mascotes);
-                        break;
-                    case 2:
-                        MenuInteracao.ExibirMenu(mascoteAdotado);
-                        break;
-                    case 3:
-                        return;
-                    default:
-                        break;
+                    switch (opc)
+                    {
+                        case 0:
+                            PesquisarMascote(ref mascotes);
+                            break;
+                        case 1:
+                            MenuAdocao.ExibirMenu(ref mascotes, ref mascoteAdotado);
+                            break;
+                        case 2:
+                            MenuInteracao.ExibirMenu(ref mascoteAdotado);
+                            break;
+                        case 3:
+                            break;
+                        default:
+                            break;
+                    }
                 }
+                else
+                {
+                    ErroEncontrarOpcao();
+                }
+
+            } while (opc != 3);
+        }
+
+        public static void PesquisarMascote(ref List<Mascote> mascotes)
+        {
+            ExibirBuscaMascote();
+            string nomeMascote = Console.ReadLine() ?? "null";
+            if (ComunicacaoAPI.BuscarMascote(mascotes, nomeMascote))
+            {
+                ExibirMascoteEncontrado();
             }
             else
             {
-                ErroEncontrarOpcao();
+                ExibirMascoteNaoEncontrado();
             }
-
+            Thread.Sleep(2000);
         }
 
     }

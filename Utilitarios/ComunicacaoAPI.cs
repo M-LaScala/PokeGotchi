@@ -51,7 +51,7 @@ internal static class ComunicacaoAPI
 
     }
 
-    public static void BuscarMascote(List<Mascote> mascotes,String nome)
+    public static bool BuscarMascote(List<Mascote> mascotes,String nome)
     {
         var client = new RestClient($"https://pokeapi.co/api/v2/pokemon/{nome}");
         RestRequest request = new("", Method.Get);
@@ -66,11 +66,13 @@ internal static class ComunicacaoAPI
             // Adiciona a resposta da API de forma Deserializada na lista de mascotes
             mascotes.Add(JsonSerializer.Deserialize<Mascote>(response.Content)!); // ! operador indicando que não pode ser nullo   
             mascotes[idCount].id = idCount;
+            return true;
         }
         else
         {
             // Verifica se ErrorMessage esta null e exibe a msg 
             Console.WriteLine(response.ErrorMessage ?? "Erro não definido pela API!");
+            return false;
         }
     }
 

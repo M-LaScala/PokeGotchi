@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using PokéGotchi.Model;
 using PokéGotchi.Utilitarios;
+using System;
 using static PokéGotchi.View.PokeGotchiView;
 
 namespace PokéGotchi.Menu
@@ -8,15 +9,19 @@ namespace PokéGotchi.Menu
     internal class MenuAdocao
     {
 
-        private readonly Dictionary<int, string> MenuOpc = new()
+        private static readonly Dictionary<int, string> MenuOpc = new()
         {
                 {0, "Saber Mais" },
                 {1, "Adotar esse mascote" },
                 {2, "Voltar" }
         };
 
-        public static void ExibirMenu(List<Mascote> mascotes)
+        public static void ExibirMenu(ref List<Mascote> mascotes, ref MascoteAdotado mascoteAdotado)
         {
+
+            Mascote mascoteEscolhido = new();
+            int escolhaMascote, opc;
+
             // Configurando o AutoMapper os objetos a serem mapeados ( Origem -> Destino )
             var Config = new MapperConfiguration(cfg =>
             {
@@ -26,9 +31,6 @@ namespace PokéGotchi.Menu
 
             // Definindo o mapper
             var mapper = Config.CreateMapper();
-
-            int escolhaMascote, oP;
-            Mascote MascoteEscolhido, MascoteAdotado = new();
 
             Console.Clear();
             ExibeMenuAdocao();
@@ -41,46 +43,48 @@ namespace PokéGotchi.Menu
             do
             {
                 try { escolhaMascote = int.Parse(Console.ReadLine() ?? "0"); } catch { escolhaMascote = -1; }
-                MascoteEscolhido = Filtros.ListarMascotePorId(mascotes, escolhaMascote);
+                mascoteEscolhido = Filtros.ListarMascotePorId(mascotes, escolhaMascote);
 
-                if (MascoteEscolhido == null)
+                if (mascoteEscolhido == null)
                 {
                     ErroEncontrarOpcao();
                 }
 
-            } while (MascoteEscolhido == null);
+            } while (mascoteEscolhido == null);
 
-            ExibeManuAdocaoOPC(MascoteEscolhido);
+            ExibirMenus(MenuOpc, "Menu adocao");
 
             do
             {
+                try { opc = int.Parse(Console.ReadLine() ?? "0"); } catch { opc = -1; };
 
-                try { oP = int.Parse(Console.ReadLine() ?? "0"); } catch { oP = -1; };
-
-                switch (oP)
+                if (MenuOpc.ContainsKey(opc))
                 {
-                    case (int)MenuAdocao.SABER_MAIS:
-                        MascoteEscolhido.ExibirDetalhesMascote();
-                        ExibeManuAdocaoOPC(MascoteEscolhido);
-                        break;
+                    switch (opc)
+                    {
+                        case 0:
+                            mascoteEscolhido.ExibirDetalhesMascote();
+                            break;
 
-                    case (int)MenuAdocao.ADOTAR:
-                        MascoteAdotado = MascoteEscolhido;
-                        ExibeAdocao(MascoteEscolhido);
-                        Console.ReadLine();
-                        break;
+                        case 1:
+                            ExibeAdocao(mascoteEscolhido);
+                            mascoteAdotado = mapper.Map<MascoteAdotado>(mascoteEscolhido);
+                            Console.ReadLine();
+                            break;
 
-                    case (int)MenuAdocao.VOLTAR:
-                        break;
+                        case 2:
+                            break;
 
-                    default:
-                        ErroEncontrarOpcao();
-                        break;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    ErroEncontrarOpcao();
                 }
 
-            } while (oP != (int)MenuAdocao.VOLTAR && oP != (int)MenuAdocao.ADOTAR);
-
-            return MascoteAdotado;
+            } while (opc != 2 && opc != 1);
         }
     }
 }

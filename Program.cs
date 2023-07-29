@@ -30,6 +30,6 @@ internal class Program
         }
 
         MenuPrincipal menuPrincipal = new();
-        menuPrincipal.ExibirMenu(mascotes);
+        menuPrincipal.ExibirMenu(ref mascotes);
     }
 }
