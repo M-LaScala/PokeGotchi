@@ -6,7 +6,7 @@ namespace PokéGotchi.View
     internal class PokeGotchiView
     {
 
-        private const int VELOCIDADE = 45;
+        private const int VELOCIDADE = 0;
 
         public static void ExibirLogo()
         {
@@ -38,7 +38,6 @@ namespace PokéGotchi.View
         {
             Console.WriteLine("---------------------------- VER MASCOTE -----------------------------");
             Console.WriteLine("Você ainda não adotou um mascote!");
-            Console.WriteLine("Por favor, gentileza entrar com uma nova opcao.");
         }
 
         public static void ExibirErroEncontrarOpcao()

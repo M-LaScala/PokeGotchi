@@ -20,7 +20,7 @@ namespace PokéGotchi.Menu
         {
 
             Mascote mascoteEscolhido = new();
-            int escolhaMascote, opc;
+            int escolhaMascote, opc = -1;
 
             // Configurando o AutoMapper os objetos a serem mapeados ( Origem -> Destino )
             var Config = new MapperConfiguration(cfg =>
@@ -56,6 +56,12 @@ namespace PokéGotchi.Menu
 
             do
             {
+
+                if (opc != -1)
+                {
+                    ExibirMenus(MenuOpc, "Menu adocao");
+                }
+
                 try { opc = int.Parse(Console.ReadLine() ?? "0"); } catch { opc = -1; };
 
                 if (MenuOpc.ContainsKey(opc))

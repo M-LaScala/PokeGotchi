@@ -30,7 +30,6 @@ namespace PokéGotchi.Menu
                 }
 
                 try { opc = int.Parse(Console.ReadLine() ?? "0"); } catch { opc = -1; };
-                Console.Clear();
                 // Valida opção
                 if (MenuOpc.ContainsKey(opc)!)
                 {
@@ -40,19 +39,21 @@ namespace PokéGotchi.Menu
                             PesquisarMascote(ref mascotes);
                             break;
                         case 1:
+                            MenuAdocao.ExibirMenu(ref mascotes, ref mascoteAdotado);                          
+                            break;
+                        case 2:
                             
-                            if (mascoteAdotado is not null)
+                            if (mascoteAdotado.Nome is not null)
                             {
-                                MenuAdocao.ExibirMenu(ref mascotes, ref mascoteAdotado);
+                                MenuInteracao.ExibirMenu(ref mascoteAdotado);
                             }
                             else
                             {
                                 ExibirSemMascote();
+                                ExibirAguarde();
+                                Thread.Sleep(5000);
                             }
 
-                            break;
-                        case 2:
-                            MenuInteracao.ExibirMenu(ref mascoteAdotado);
                             break;
                         case 3:
                             break;
