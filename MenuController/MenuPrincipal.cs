@@ -8,7 +8,7 @@ namespace PokéGotchi.Menu
     {
         private static readonly Dictionary<int, string> MenuOpc = new()
         {
-                {0, "Pesquisar Mascote" },
+                {0, "Pesquisar mascote" },
                 {1, "Adotar mascote" },
                 {2, "Brincar com seu mascote" },
                 {3, "Sair" }
