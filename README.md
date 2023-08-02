@@ -89,3 +89,6 @@ https://pt.stackoverflow.com/questions/247/como-capitalizar-nomes-em-c
 O publish da aplicação foi realizado seguindo a documentação oficial da Microsoft.
 
 https://learn.microsoft.com/pt-br/dotnet/core/tutorials/publishing-with-visual-studio?pivots=dotnet-6-0
+
+Tive problemas com os commits por conta de um e-mail e esse artigo ajudou a corrigir o problema.
+https://blog.tiagopariz.com/git-corrija-o-autor-dos-commits/
